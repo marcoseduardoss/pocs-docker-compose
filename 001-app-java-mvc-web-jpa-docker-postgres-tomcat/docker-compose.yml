@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  my-webapp:
+    build:
+      context: .
+      args:
+        - artifact_name=my-webapp
+      dockerfile: Dockerfile
+    image: my-tomcat:1.0
+    container_name: my-webapp
+    ports:
+      - 8080:8080
+    restart: always           
+    links:
+      - database
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    restart: unless-stopped 
+    container_name: my-database
+    ports:
+      - 5432:5432
+    environment:      
+      POSTGRES_DB: eesdevops
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres    
+    
+#restart: unless-stopped
+    
+         
