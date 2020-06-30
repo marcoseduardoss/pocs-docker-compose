@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  my_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-api:1.0
+    container_name: my_api
+    ports:
+      - 8080:8080
+    restart: always
